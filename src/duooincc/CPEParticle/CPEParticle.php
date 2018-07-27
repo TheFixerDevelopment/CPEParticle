@@ -70,7 +70,7 @@ class CPEParticle extends PluginBase{
 
 		$this->getScheduler()->scheduleRepeatingTask(new AddParticleTask($this), 2);
 	}
-
+        }
 	/**
 	 * Called when the plugin is disabled
 	 * Use this to free open things and finish actions
