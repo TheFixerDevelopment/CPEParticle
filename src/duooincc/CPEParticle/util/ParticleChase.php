@@ -1,6 +1,6 @@
 <?php
 
-namespace duooincc\CPEParticle;
+namespace duooincc\CPEParticle\util;
 
 use duooincc\CPEParticle\command\PoolCommand;
 use duooincc\CPEParticle\command\subcommands\{
