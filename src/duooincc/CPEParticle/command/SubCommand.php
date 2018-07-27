@@ -50,7 +50,7 @@ abstract class SubCommand{
 	 * @param CommandSender $sender
 	 * @param String[]      $args
 	 */
-	public function execute(CommandSender $sender, array $args) : void{
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
 		if(!$this->checkPermission($sender)){
 			$sender->sendMessage(Translation::translate('command-generic-failure@permission'));
 		}elseif(!$this->onCommand($sender, $args)){

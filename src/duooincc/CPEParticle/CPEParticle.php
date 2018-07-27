@@ -9,7 +9,6 @@ use duooincc\CPEParticle\command\subcommands\{
 use duooincc\CPEParticle\task\AddParticleTask;
 use duooincc\CPEParticle\util\Translation;
 use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\Task;
 
 class CPEParticle extends PluginBase{
 	/** @var ParticleChase */
@@ -18,7 +17,7 @@ class CPEParticle extends PluginBase{
 	/**
 	 * @return ParticleChase
 	 */
-	public static function getInstance() : ParticleChase{
+	public static function getInstance() : self{ //This should be self, but I'll change it later if it's not correct. ;P
 		return self::$instance;
 	}
 
@@ -31,14 +30,14 @@ class CPEParticle extends PluginBase{
 	public function onLoad() : void{
 		if(self::$instance === null){
 			self::$instance = $this;
-			Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
+			Translation::loadFromResource($this->getResource("lang/eng.yml"), true);
 		}
 	}
 
 	/**
 	 * Called when the plugin is enabled
 	 */
-	public function onEnable():void{
+	public function onEnable(): void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);
@@ -46,20 +45,20 @@ class CPEParticle extends PluginBase{
 
 		$this->reloadConfig();
 
-		$langfilename = $dataFolder . 'lang.yml';
+		$langfilename = $dataFolder . "lang.yml";
 		if(!file_exists($langfilename)){
-			$resource = $this->getResource('lang/eng.yml');
+			$resource = $this->getResource("lang/eng.yml");
 			fwrite($fp = fopen("{$dataFolder}lang.yml", "wb"), $contents = stream_get_contents($resource));
 			fclose($fp);
 			Translation::load($langfilename);
 		}
 
 		if($this->command == null){
-			$this->command = new PoolCommand($this, 'particlechase');
+			$this->command = new PoolCommand($this, "particlechase");
 			$this->command->createSubCommand(SetSubCommand::class);
 			$this->command->createSubCommand(RemoveSubCommand::class);
 			$this->command->createSubCommand(ListSubCommand::class);
-		}	Translation::loadFromContents($contents);
+			Translation::loadFromContents($contents);
 		}else{
 			
 		$this->command->updateTranslation();
@@ -76,7 +75,7 @@ class CPEParticle extends PluginBase{
 	 * Called when the plugin is disabled
 	 * Use this to free open things and finish actions
 	 */
-	public function onDisable(){
+	public function onDisable(): void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);

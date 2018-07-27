@@ -18,7 +18,7 @@ class ParticleChase extends PluginBase{
 	/**
 	 * @return ParticleChase
 	 */
-	public static function getInstance():ParticleChase{
+	public static function getInstance() : self{
 		return self::$instance;
 	}
 
@@ -31,14 +31,14 @@ class ParticleChase extends PluginBase{
 	public function onLoad() : void{
 		if(self::$instance === null){
 			self::$instance = $this;
-			Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
+			Translation::loadFromResource($this->getResource("lang/eng.yml"), true);
 		}
 	}
 
 	/**
 	 * Called when the plugin is enabled
 	 */
-	public function onEnable():void{
+	public function onEnable() : void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);
@@ -46,9 +46,9 @@ class ParticleChase extends PluginBase{
 
 		$this->reloadConfig();
 
-		$langfilename = $dataFolder . 'lang.yml';
+		$langfilename = $dataFolder . "lang.yml";
 		if(!file_exists($langfilename)){
-			$resource = $this->getResource('lang/eng.yml');
+			$resource = $this->getResource("lang/eng.yml2");
 			fwrite($fp = fopen("{$dataFolder}lang.yml", "wb"), $contents = stream_get_contents($resource));
 			fclose($fp);
 			Translation::loadFromContents($contents);
@@ -57,7 +57,7 @@ class ParticleChase extends PluginBase{
 		}
 
 		if($this->command == null){
-			$this->command = new PoolCommand($this, 'particlechase');
+			$this->command = new PoolCommand($this, "particlechase");
 			$this->command->createSubCommand(SetSubCommand::class);
 			$this->command->createSubCommand(RemoveSubCommand::class);
 			$this->command->createSubCommand(ListSubCommand::class);
@@ -76,7 +76,7 @@ class ParticleChase extends PluginBase{
 	 * Called when the plugin is disabled
 	 * Use this to free open things and finish actions
 	 */
-	public function onDisable(){
+	public function onDisable(): void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);

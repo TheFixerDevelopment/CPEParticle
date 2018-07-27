@@ -24,7 +24,7 @@ class AddParticleTask extends Task{
 	/**
 	 * @param int $currentTick
 	 */
-	public function onRun(int $currentTick){
+	public function onRun(int $currentTick): void{
 		$playerData = $this->owner->getConfig()->getAll();
 		foreach(Server::getInstance()->getOnlinePlayers() as $key => $value){
 			$playerName = $value->getLowerCaseName();

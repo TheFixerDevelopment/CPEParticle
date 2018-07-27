@@ -18,11 +18,12 @@ class ListSubCommand extends SubCommand{
 
 	/**
 	 * @param CommandSender $sender
-	 * @param String[]      $args
+	 * @param string $commandLabel
+         * @param String[]      $args
 	 *
 	 * @return bool
 	 */
-	public function onCommand(CommandSender $sender, array $args) : bool{
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{ 
 		$list = [];
 		foreach($this->plugin->getConfig()->getAll() as $key => $value){
 			if(($player = Server::getInstance()->getPlayerExact($key)) !== null){

@@ -20,7 +20,7 @@ class RemoveSubCommand extends SubCommand{
 	 *
 	 * @return bool
 	 */
-	public function onCommand(CommandSender $sender, array $args) : bool{
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
 		if(isset($args[0])){
 			$config = $this->plugin->getConfig();
 			if($args[0] === '*' && $sender instanceof Player){
